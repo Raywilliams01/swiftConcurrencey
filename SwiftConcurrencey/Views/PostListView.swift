@@ -8,11 +8,10 @@
 import SwiftUI
 
 struct PostListView: View {
-    @StateObject var vm = PostsListViewModel()
-    var userId: Int?
+    var posts: [Post]
     var body: some View {
             List {
-                ForEach(vm.posts) { posts in
+                ForEach(posts) { posts in
                     VStack(alignment: .leading) {
                         Text(posts.title)
                             .font(.headline)
@@ -25,20 +24,9 @@ struct PostListView: View {
         .navigationTitle("Posts")
         .navigationBarTitleDisplayMode(.inline)
         .listStyle(.plain)
-        .alert("Application Error", isPresented: $vm.showAlert, actions: {
-            Button("OK"){}
-        }, message: {
-            if let errorMessage = vm.errorMessage {
-                Text(errorMessage)
-            }
-        })
-        .task {
-            vm.userId = userId
-            await vm.fetchPosts()
-        }
     }
 }
 
-#Preview {
-    PostListView(userId: 1)
-}
+//#Preview {
+//    PostListView()
+//}
