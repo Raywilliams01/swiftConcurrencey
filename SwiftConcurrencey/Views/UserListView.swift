@@ -42,8 +42,8 @@ struct UserListView: View {
                 Text(errorMessage)
             }
         })
-        .onAppear() {
-            vm.fetchUsers()
+        .task {
+            await vm.fetchUsers()
         }
     }
 }

@@ -32,9 +32,9 @@ struct PostListView: View {
                 Text(errorMessage)
             }
         })
-        .onAppear() {
+        .task {
             vm.userId = userId
-            vm.fetchPosts()
+            await vm.fetchPosts()
         }
     }
 }
