@@ -25,6 +25,13 @@ struct PostListView: View {
         .navigationTitle("Posts")
         .navigationBarTitleDisplayMode(.inline)
         .listStyle(.plain)
+        .alert("Application Error", isPresented: $vm.showAlert, actions: {
+            Button("OK"){}
+        }, message: {
+            if let errorMessage = vm.errorMessage {
+                Text(errorMessage)
+            }
+        })
         .onAppear() {
             vm.userId = userId
             vm.fetchPosts()
@@ -33,5 +40,5 @@ struct PostListView: View {
 }
 
 #Preview {
-    PostListView()
+    PostListView(userId: 1)
 }
